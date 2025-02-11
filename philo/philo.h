@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:06:37 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/02/11 14:21:36 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/02/11 16:05:47 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ typedef struct s_forks
 
 int		check_params(int argc, char **argv);
 void	error_msg(void);
+int		ft_atoi(const char *str);
 #endif
