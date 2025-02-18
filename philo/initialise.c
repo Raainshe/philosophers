@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:44:22 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/02/18 13:23:16 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/02/18 14:46:51 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void	initialise_philo(t_data *data)
 		data->philos[i].last_eaten = data->start_time;
 		data->philos[i].left_fork = i;
 		data->philos[i].right_fork = (i + 1) % data->no_philo;
+		if (data->no_philo == 1)
+		{
+			data->philos[i].left_fork = 0;
+			data->philos[i].right_fork = 0;
+		}
 		data->philos[i].times_eaten = 0;
 		i++;
 	}

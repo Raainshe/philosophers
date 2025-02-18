@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:11:15 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/02/11 15:21:39 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/02/18 14:25:22 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	ft_isdigit(int num)
 void	error_msg(void)
 {
 	printf("You have entered the incorrect perameters! Please enter:\n");
-	printf("./philo {number_of_philosopher {time_to_die} {time_to_eat} {time_to_sleep} [number_of_times_each_philosopher_must_eat]");
+	printf("./philo {number_of_philosopher {time_to_die} {time_to_eat}\n");
+	printf("{time_to_sleep} [number_of_times_each_philosopher_must_eat]\n");
 }
 
 //returns 1 if params are correct and 0 if not
