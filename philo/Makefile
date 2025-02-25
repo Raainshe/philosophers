@@ -7,7 +7,13 @@ PHILO = philo
 # Source and Object Files
 SRC_FILES = ft_atoi.c \
 			param_check.c \
-			philosophers.c
+			philosophers.c \
+			cleaning.c \
+			helper.c \
+			initialise.c \
+			monitoring.c \
+			simulation.c
+
 
 OBJ_FILES = $(SRC_FILES:%.c=%.o)
 

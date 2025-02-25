@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:28:54 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/02/24 14:41:05 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/02/25 13:58:24 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,29 @@ void	*routine(void *arg)
 		print_action(philo, "thinking");
 	}
 	return (NULL);
+}
+
+int	start_simulation(t_data *data)
+{
+	int			i;
+	pthread_t	monitor;
+
+	i = 0;
+	while (i < data->no_philo)
+	{
+		if (pthread_create(&data->philos[i].thread, NULL, &routine,
+				&data->philos[i]) != 0)
+			return (0);
+		i++;
+	}
+	if (pthread_create(&monitor, NULL, &death_monitor, data) != 0)
+		return (0);
+	pthread_join(monitor, NULL);
+	i = 0;
+	while (i < data->no_philo)
+	{
+		pthread_join(data->philos[i].thread, NULL);
+		i++;
+	}
+	return (1);
 }

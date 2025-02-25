@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:44:22 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/02/25 12:01:58 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/02/25 13:08:10 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	initialise_philo(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < data->philos->no)
+	while (i < data->no_philo)
 	{
 		data->philos[i].no = i;
 		data->philos[i].data = data;
@@ -78,7 +78,7 @@ t_data	*initialise_params(int argc, char **argv)
 	data->time_eat = ft_atoi(argv[3]);
 	data->time_sleep = ft_atoi(argv[4]);
 	data->no_eats = -1;
-	if (argc == 5)
+	if (argc == 6)
 		data->no_eats = ft_atoi(argv[5]);
 	data->death = false;
 	if (!initialise_time_and_philo(data))
