@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:06:37 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/02/24 14:41:41 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/02/25 12:13:06 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int					check_params(int argc, char **argv);
 void				error_msg(void);
 int					ft_atoi(const char *str);
 t_data				*initialise_params(int argc, char **argv);
-void				print_action(t_philo *philo, char *action);
+void				print_action(t_philo philo, char *action);
 long long			get_time(void);
 
 #endif

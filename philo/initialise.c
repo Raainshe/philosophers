@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:44:22 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/02/18 14:46:51 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/02/25 12:01:58 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ t_data	*initialise_params(int argc, char **argv)
 {
 	t_data	*data;
 
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (NULL);
 	data->no_philo = ft_atoi(argv[1]);
 	data->time_die = ft_atoi(argv[2]);
 	data->time_eat = ft_atoi(argv[3]);
