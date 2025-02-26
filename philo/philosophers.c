@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:06:34 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/02/25 13:05:44 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:04:18 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ int	main(int argc, char **argv)
 	if (!data)
 		return (1);
 	if (start_simulation(data) == 0)
-		return (clean_up(data), 1);
+		return (clean_up(data), printf("Someone died\n"), 1);
 }
