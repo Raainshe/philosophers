@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:44:22 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/02/25 13:08:10 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/06 16:08:36 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,6 @@ t_data	*initialise_params(int argc, char **argv)
 	if (!initialise_time_and_philo(data))
 		return (free(data), NULL);
 	if (!initialise_mutexes(data))
-	{
-		free(data->philos);
-		free(data);
-		return (NULL);
-	}
+		return (clean_up(data), NULL);
 	return (data);
 }

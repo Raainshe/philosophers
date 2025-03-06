@@ -6,11 +6,27 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:11:15 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/02/18 14:25:22 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:59:37 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	has_zero(int argc, char **argv)
+{
+	int	i;
+
+	i = 1;
+	while (i <= argc - 1)
+	{
+		if (ft_atoi(argv[i]) == 0)
+		{
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 
 int	ft_isdigit(int num)
 {
@@ -49,6 +65,8 @@ int	check_params(int argc, char **argv)
 		}
 	}
 	else
+		return (0);
+	if (has_zero(argc, argv))
 		return (0);
 	return (1);
 }
