@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:40:41 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/02/25 13:11:07 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/10 13:22:05 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_action(t_philo *philo, char *action)
 	if (!philo->data->death)
 	{
 		time = get_time() - philo->data->start_time;
-		printf("Time: %lld Philo: %d Status: %s\n", time, philo->no, action);
+		printf("%lld %d %s\n", time, philo->no, action);
 	}
 	pthread_mutex_unlock(&philo->data->write_lock);
 }

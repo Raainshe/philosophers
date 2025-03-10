@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:28:54 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/06 16:14:07 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/10 13:15:16 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	philo_eating(t_philo *philo)
 	print_action(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
 	print_action(philo, "has taken a fork");
-	print_action(philo, "eating");
+	print_action(philo, "is eating");
 	pthread_mutex_lock(&philo->data->write_lock);
 	philo->last_eaten = get_time();
 	philo->times_eaten = philo->times_eaten + 1;
@@ -48,10 +48,10 @@ void	*routine(void *arg)
 	while (!philo->data->death)
 	{
 		philo_eating(philo);
-		print_action(philo, "sleeping");
+		print_action(philo, "is sleeping");
 		printf("%lld\n", get_time());
 		usleep(philo->data->time_sleep * 1000);
-		print_action(philo, "thinking");
+		print_action(philo, "is thinking");
 	}
 	return (NULL);
 }
