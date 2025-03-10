@@ -6,11 +6,27 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:44:11 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/10 13:25:47 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/10 13:55:24 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	all_eaten(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->no_eats == -1)
+		return (0);
+	while (i < data->no_philo)
+	{
+		if (data->philos->times_eaten < data->no_eats)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	is_dead(t_philo *philo)
 {
@@ -45,6 +61,13 @@ void	*death_monitor(void *arg)
 			if (is_dead(&data->philos[i]))
 				return (NULL);
 			i++;
+		}
+		if (all_eaten(data))
+		{
+			pthread_mutex_lock(&data->write_lock);
+			data->death = true;
+			pthread_mutex_unlock(&data->write_lock);
+			return (NULL);
 		}
 		usleep(1000);
 	}

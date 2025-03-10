@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:28:54 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/10 13:15:16 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/10 13:32:55 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	*routine(void *arg)
 	{
 		philo_eating(philo);
 		print_action(philo, "is sleeping");
-		printf("%lld\n", get_time());
 		usleep(philo->data->time_sleep * 1000);
 		print_action(philo, "is thinking");
 	}
