@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:28:54 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/10 13:32:55 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:24:53 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	philo_eating(t_philo *philo)
 {
+	if (philo->data->death)
+		return ;
 	if (philo->data->no_philo == 1)
 	{
 		pthread_mutex_lock(&philo->data->forks[philo->left_fork]);

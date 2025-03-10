@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:44:11 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/10 13:55:24 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:25:36 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,15 @@ int	all_eaten(t_data *data)
 		return (0);
 	while (i < data->no_philo)
 	{
-		if (data->philos->times_eaten < data->no_eats)
+		if (data->philos[i].times_eaten < data->no_eats)
 			return (0);
+		i++;
+	}
+	i = 0;
+	while (i < data->no_philo)
+	{
+		printf("Philo %d ate %d times ", data->philos[i].no,
+				data->philos[i].times_eaten);
 		i++;
 	}
 	return (1);
@@ -30,14 +37,13 @@ int	all_eaten(t_data *data)
 
 int	is_dead(t_philo *philo)
 {
-	long long	time;
+	long long	time_since_last_meal;
 	int			result;
 
 	result = 0;
 	pthread_mutex_lock(&philo->data->write_lock);
-	time = get_time();
-	if ((time - philo->data->start_time)
-		- philo->last_eaten > philo->data->time_die)
+	time_since_last_meal = get_time() - philo->last_eaten;
+	if (time_since_last_meal > philo->data->time_die)
 	{
 		print_action(philo, "died");
 		philo->data->death = true;
