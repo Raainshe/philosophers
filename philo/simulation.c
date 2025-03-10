@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:28:54 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/10 14:24:53 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:58:38 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	philo_eating(t_philo *philo)
 	{
 		pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
 		print_action(philo, "has taken a fork");
-		usleep(philo->data->time_die * 1000);
+		usleep(philo->data->time_die * 1000 + 1000);
 		pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
 		return ;
 	}
