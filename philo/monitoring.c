@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:44:11 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/10 16:07:18 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/10 21:08:49 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,18 @@
 int	all_eaten(t_data *data)
 {
 	int	i;
+	int	eaten_count;
 
 	i = 0;
 	if (data->no_eats == -1)
 		return (0);
 	while (i < data->no_philo)
 	{
-		if (data->philos[i].times_eaten < data->no_eats)
+		pthread_mutex_lock(&data->write_lock);
+		eaten_count = data->philos[i].times_eaten;
+		pthread_mutex_unlock(&data->write_lock);
+		if (eaten_count < data->no_eats)
 			return (0);
-		i++;
-	}
-	i = 0;
-	while (i < data->no_philo)
-	{
-		printf("Philo %d ate %d times ", data->philos[i].no,
-				data->philos[i].times_eaten);
 		i++;
 	}
 	return (1);

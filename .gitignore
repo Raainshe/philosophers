@@ -1,2 +1,4 @@
 .DS_Store
 *.o
+philo.dSYM/
+valgrind_output.txt

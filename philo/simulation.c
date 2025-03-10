@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:28:54 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/10 15:58:38 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/10 21:05:12 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	philo_eating(t_philo *philo)
 {
+	int	first_fork;
+	int	second_fork;
+
 	if (philo->data->death)
 		return ;
 	if (philo->data->no_philo == 1)
@@ -24,9 +27,16 @@ void	philo_eating(t_philo *philo)
 		pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
 		return ;
 	}
-	pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
+	first_fork = philo->left_fork;
+	second_fork = philo->right_fork;
+	if (second_fork < first_fork)
+	{
+		first_fork = philo->right_fork;
+		second_fork = philo->left_fork;
+	}
+	pthread_mutex_lock(&philo->data->forks[first_fork]);
 	print_action(philo, "has taken a fork");
-	pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
+	pthread_mutex_lock(&philo->data->forks[second_fork]);
 	print_action(philo, "has taken a fork");
 	print_action(philo, "is eating");
 	pthread_mutex_lock(&philo->data->write_lock);
@@ -34,21 +44,27 @@ void	philo_eating(t_philo *philo)
 	philo->times_eaten = philo->times_eaten + 1;
 	pthread_mutex_unlock(&philo->data->write_lock);
 	usleep(philo->data->time_eat * 1000);
-	pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
-	pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
+	pthread_mutex_unlock(&philo->data->forks[second_fork]);
+	pthread_mutex_unlock(&philo->data->forks[first_fork]);
 }
 
 void	*routine(void *arg)
 {
 	t_philo	*philo;
+	int		death_status;
 
 	philo = (t_philo *)arg;
 	if (philo->no % 2)
 	{
 		usleep(15000);
 	}
-	while (!philo->data->death)
+	while (1)
 	{
+		pthread_mutex_lock(&philo->data->write_lock);
+		death_status = philo->data->death;
+		pthread_mutex_unlock(&philo->data->write_lock);
+		if (death_status)
+			break ;
 		philo_eating(philo);
 		print_action(philo, "is sleeping");
 		usleep(philo->data->time_sleep * 1000);
