@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:44:11 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/11 13:57:44 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/11 14:50:55 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	all_eaten(t_data *data)
 		return (0);
 	while (i < data->no_philo)
 	{
-		pthread_mutex_lock(&data->write_lock);
+		pthread_mutex_lock(&data->philos[i].state_lock);
 		eaten_count = data->philos[i].times_eaten;
-		pthread_mutex_unlock(&data->write_lock);
+		pthread_mutex_unlock(&data->philos[i].state_lock);
 		if (eaten_count < data->no_eats)
 			return (0);
 		i++;
@@ -48,10 +48,10 @@ int	is_dead(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->death_lock);
 	if (result)
 	{
-		pthread_mutex_lock(&philo->data->write_lock);
+		pthread_mutex_lock(&philo->state_lock);
 		printf("%lld %d has died\n", get_time() - philo->data->start_time,
 				philo->no);
-		pthread_mutex_unlock(&philo->data->write_lock);
+		pthread_mutex_unlock(&philo->state_lock);
 	}
 	return (result);
 }
@@ -73,9 +73,9 @@ void	*death_monitor(void *arg)
 		}
 		if (all_eaten(data))
 		{
-			pthread_mutex_lock(&data->write_lock);
+			pthread_mutex_lock(&data->death_lock);
 			data->death = true;
-			pthread_mutex_unlock(&data->write_lock);
+			pthread_mutex_unlock(&data->death_lock);
 			return (NULL);
 		}
 		usleep(1000);

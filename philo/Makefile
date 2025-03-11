@@ -12,7 +12,8 @@ SRC_FILES = ft_atoi.c \
 			helper.c \
 			initialise.c \
 			monitoring.c \
-			simulation.c
+			simulation.c \
+			initialise_helper.c
 
 
 OBJ_FILES = $(SRC_FILES:%.c=%.o)

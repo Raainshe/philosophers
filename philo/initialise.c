@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:44:22 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/11 13:47:03 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/11 14:45:00 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,9 @@
 
 int	initialise_mutexes(t_data *data)
 {
-	int	i;
-
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->no_philo);
-	if (!data->forks)
+	if (!initialise_fork_mutexes(data))
 		return (0);
-	i = 0;
-	while (i < data->no_philo)
-	{
-		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
-			return (0);
-		i++;
-	}
-	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
-		return (0);
-	if (pthread_mutex_init(&data->death_lock, NULL) != 0)
+	if (!initialise_control_mutexes(data))
 		return (0);
 	return (1);
 }
@@ -51,6 +39,7 @@ void	initialise_philo(t_data *data)
 			data->philos[i].right_fork = 0;
 		}
 		data->philos[i].times_eaten = 0;
+		pthread_mutex_init(&data->philos[i].state_lock, NULL);
 		i++;
 	}
 }

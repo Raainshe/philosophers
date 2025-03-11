@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:28:54 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/11 13:24:31 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/11 14:49:00 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	philo_eating_two(t_philo *philo, int first_fork, int second_fork)
 	pthread_mutex_lock(&philo->data->forks[second_fork]);
 	print_action(philo, "has taken a fork");
 	print_action(philo, "is eating");
-	pthread_mutex_lock(&philo->data->write_lock);
+	pthread_mutex_lock(&philo->state_lock);
 	philo->last_eaten = get_time();
 	philo->times_eaten = philo->times_eaten + 1;
-	pthread_mutex_unlock(&philo->data->write_lock);
+	pthread_mutex_unlock(&philo->state_lock);
 	usleep(philo->data->time_eat * 1000);
 	pthread_mutex_unlock(&philo->data->forks[second_fork]);
 	pthread_mutex_unlock(&philo->data->forks[first_fork]);
@@ -65,9 +65,9 @@ void	*routine(void *arg)
 	}
 	while (1)
 	{
-		pthread_mutex_lock(&philo->data->write_lock);
+		pthread_mutex_lock(&philo->data->death_lock);
 		death_status = philo->data->death;
-		pthread_mutex_unlock(&philo->data->write_lock);
+		pthread_mutex_unlock(&philo->data->death_lock);
 		if (death_status)
 			break ;
 		philo_eating(philo);

@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:06:37 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/11 13:45:55 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/11 14:44:24 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_philo
 	int				left_fork;
 	long long		last_eaten;
 	pthread_t		thread;
+	pthread_mutex_t	state_lock;
 	struct s_data	*data;
 }					t_philo;
 
@@ -45,6 +46,9 @@ typedef struct s_data
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	death_lock;
+	int				initialised_mutexes;
+	bool			write_lock_initialised;
+	bool			death_lock_initialised;
 }					t_data;
 
 int					check_params(int argc, char **argv);
@@ -56,4 +60,6 @@ long long			get_time(void);
 void				*death_monitor(void *arg);
 int					start_simulation(t_data *data);
 void				clean_up(t_data *data);
+int					initialise_fork_mutexes(t_data *data);
+int					initialise_control_mutexes(t_data *data);
 #endif
