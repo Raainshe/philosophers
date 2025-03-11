@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:44:11 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/11 16:41:29 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:12:36 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	*death_monitor(void *arg)
 			pthread_mutex_unlock(&data->death_lock);
 			return (NULL);
 		}
-		usleep(500);
+		usleep(200);
 	}
 	return (NULL);
 }
