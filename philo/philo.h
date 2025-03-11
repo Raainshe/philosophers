@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:06:37 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/02/25 13:04:56 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:45:55 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_data
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write_lock;
+	pthread_mutex_t	death_lock;
 }					t_data;
 
 int					check_params(int argc, char **argv);

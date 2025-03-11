@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:44:11 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/11 13:06:36 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:57:44 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,21 @@ int	is_dead(t_philo *philo)
 	int			result;
 
 	result = 0;
-	pthread_mutex_lock(&philo->data->write_lock);
 	time_since_last_meal = get_time() - philo->last_eaten;
+	pthread_mutex_lock(&philo->data->death_lock);
 	if (time_since_last_meal > philo->data->time_die && !philo->data->death)
 	{
-		printf("%lld %d has died\n", get_time() - philo->data->start_time);
-		printf("%d has died\n", philo->no);
 		philo->data->death = true;
 		result = 1;
 	}
-	pthread_mutex_unlock(&philo->data->write_lock);
+	pthread_mutex_unlock(&philo->data->death_lock);
+	if (result)
+	{
+		pthread_mutex_lock(&philo->data->write_lock);
+		printf("%lld %d has died\n", get_time() - philo->data->start_time,
+				philo->no);
+		pthread_mutex_unlock(&philo->data->write_lock);
+	}
 	return (result);
 }
 

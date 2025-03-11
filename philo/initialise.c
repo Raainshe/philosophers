@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:44:22 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/10 16:05:23 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:47:03 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	initialise_mutexes(t_data *data)
 		i++;
 	}
 	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&data->death_lock, NULL) != 0)
 		return (0);
 	return (1);
 }
