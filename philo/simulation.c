@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:28:54 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/11 14:49:00 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/11 16:33:49 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ void	*routine(void *arg)
 	{
 		usleep(15000);
 	}
+	pthread_mutex_lock(&philo->state_lock);
+	philo->last_eaten = get_time();
+	pthread_mutex_unlock(&philo->state_lock);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->data->death_lock);
