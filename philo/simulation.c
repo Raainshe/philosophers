@@ -6,11 +6,27 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:28:54 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/10 21:05:12 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:24:31 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	philo_eating_two(t_philo *philo, int first_fork, int second_fork)
+{
+	pthread_mutex_lock(&philo->data->forks[first_fork]);
+	print_action(philo, "has taken a fork");
+	pthread_mutex_lock(&philo->data->forks[second_fork]);
+	print_action(philo, "has taken a fork");
+	print_action(philo, "is eating");
+	pthread_mutex_lock(&philo->data->write_lock);
+	philo->last_eaten = get_time();
+	philo->times_eaten = philo->times_eaten + 1;
+	pthread_mutex_unlock(&philo->data->write_lock);
+	usleep(philo->data->time_eat * 1000);
+	pthread_mutex_unlock(&philo->data->forks[second_fork]);
+	pthread_mutex_unlock(&philo->data->forks[first_fork]);
+}
 
 void	philo_eating(t_philo *philo)
 {
@@ -34,18 +50,7 @@ void	philo_eating(t_philo *philo)
 		first_fork = philo->right_fork;
 		second_fork = philo->left_fork;
 	}
-	pthread_mutex_lock(&philo->data->forks[first_fork]);
-	print_action(philo, "has taken a fork");
-	pthread_mutex_lock(&philo->data->forks[second_fork]);
-	print_action(philo, "has taken a fork");
-	print_action(philo, "is eating");
-	pthread_mutex_lock(&philo->data->write_lock);
-	philo->last_eaten = get_time();
-	philo->times_eaten = philo->times_eaten + 1;
-	pthread_mutex_unlock(&philo->data->write_lock);
-	usleep(philo->data->time_eat * 1000);
-	pthread_mutex_unlock(&philo->data->forks[second_fork]);
-	pthread_mutex_unlock(&philo->data->forks[first_fork]);
+	philo_eating_two(philo, first_fork, second_fork);
 }
 
 void	*routine(void *arg)

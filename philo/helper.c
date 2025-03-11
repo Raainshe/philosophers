@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:40:41 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/10 13:22:05 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:04:42 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ long long	get_time(void)
 	gettimeofday(&t_value, NULL);
 	return ((t_value.tv_sec * 1000) + (t_value.tv_usec / 1000));
 }
+
 void	print_action(t_philo *philo, char *action)
 {
 	long long	time;

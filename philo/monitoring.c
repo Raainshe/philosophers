@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:44:11 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/10 21:08:49 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:06:36 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	is_dead(t_philo *philo)
 	time_since_last_meal = get_time() - philo->last_eaten;
 	if (time_since_last_meal > philo->data->time_die && !philo->data->death)
 	{
-		printf("%lld %d has died\n", get_time() - philo->data->start_time,
-				philo->no);
+		printf("%lld %d has died\n", get_time() - philo->data->start_time);
+		printf("%d has died\n", philo->no);
 		philo->data->death = true;
 		result = 1;
 	}
