@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:28:54 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/11 19:14:42 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/17 18:16:37 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	philo_eating_two(t_philo *philo, int first_fork, int second_fork)
 	philo->last_eaten = get_time();
 	philo->times_eaten = philo->times_eaten + 1;
 	pthread_mutex_unlock(&philo->state_lock);
-	usleep(philo->data->time_eat * 1000);
+	ft_usleep(philo->data->time_eat, philo->data);
 	pthread_mutex_unlock(&philo->data->forks[second_fork]);
 	pthread_mutex_unlock(&philo->data->forks[first_fork]);
 }
@@ -39,7 +39,7 @@ void	philo_eating(t_philo *philo)
 	{
 		pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
 		print_action(philo, "has taken a fork");
-		usleep(philo->data->time_die * 1000 + 1000);
+		ft_usleep(philo->data->time_die, philo->data);
 		pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
 		return ;
 	}
@@ -61,7 +61,7 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->no % 2)
 	{
-		usleep(15000);
+		ft_usleep(15, philo->data);
 	}
 	pthread_mutex_lock(&philo->state_lock);
 	philo->last_eaten = get_time();
@@ -75,7 +75,7 @@ void	*routine(void *arg)
 			break ;
 		philo_eating(philo);
 		print_action(philo, "is sleeping");
-		usleep(philo->data->time_sleep * 1000);
+		ft_usleep(philo->data->time_sleep, philo->data);
 		print_action(philo, "is thinking");
 	}
 	return (NULL);

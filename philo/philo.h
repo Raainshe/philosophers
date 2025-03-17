@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:06:37 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/11 14:44:24 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/17 18:15:48 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,5 @@ int					start_simulation(t_data *data);
 void				clean_up(t_data *data);
 int					initialise_fork_mutexes(t_data *data);
 int					initialise_control_mutexes(t_data *data);
+int					ft_usleep(size_t milliseconds, t_data *data);
 #endif
