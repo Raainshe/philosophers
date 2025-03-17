@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:44:11 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/17 18:13:29 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/17 18:22:17 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	is_dead(t_philo *philo)
 	{
 		pthread_mutex_lock(&philo->state_lock);
 		printf("%lld %d has died\n", get_time() - philo->data->start_time,
-				philo->no);
+			philo->no);
 		pthread_mutex_unlock(&philo->state_lock);
 	}
 	return (result);
