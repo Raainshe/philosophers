@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:40:41 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/03/17 18:15:09 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/03/18 12:48:53 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	print_action(t_philo *philo, char *action)
 }
 
 // Gets the current time in milliseconds
-
 size_t	get_current_time(void)
 {
 	struct timeval	time;
